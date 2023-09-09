@@ -1,0 +1,12 @@
+[package]
+name = "machineid-cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.4.2", features = [ "derive" ] }
+exitcode = "1.1.2"
+itertools = "0.11.0"
+machineid-rs = "1.2.4"
+strum = "0.25.0"
+strum_macros = "0.25.2"
