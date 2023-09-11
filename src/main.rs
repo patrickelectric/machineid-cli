@@ -29,6 +29,10 @@ struct Cli {
     /// Use all parts
     #[arg(long, conflicts_with = "parts")]
     everything: bool,
+
+    /// Encryption to be used in key generation
+    #[arg(short, long, default_value = "md5")]
+    encription: UserEncryption,
 }
 
 fn file_exists(input: &str) -> Result<PathBuf, String> {
@@ -76,6 +80,24 @@ impl UserHWIDComponent {
     }
 }
 
+#[derive(Copy, Clone, PartialEq, Eq, ValueEnum)]
+pub enum UserEncryption {
+    MD5,
+    SHA256,
+    SHA1,
+}
+
+impl UserEncryption {
+    fn to_machineid_enum(&self) -> Encryption {
+        use UserEncryption::*;
+        return match self {
+            MD5 => Encryption::MD5,
+            SHA256 => Encryption::SHA256,
+            SHA1 => Encryption::SHA1,
+        };
+    }
+}
+
 /// Simple program to greet a person
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -104,7 +126,7 @@ fn main() {
         .map(|part| part.to_machineid_enum())
         .collect();
 
-    let mut builder = IdBuilder::new(Encryption::MD5);
+    let mut builder = IdBuilder::new(args.encription.to_machineid_enum());
     for component in components {
         builder.add_component(component);
     }
