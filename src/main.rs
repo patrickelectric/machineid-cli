@@ -40,8 +40,7 @@ fn file_exists(input: &str) -> Result<PathBuf, String> {
     if !path.is_file() {
         return Err(format!("\'{input}\' is not a file or does not exist."));
     }
-    Err("File token is not yet fully supported!".into())
-    // Ok(path.into())
+    Ok(path.into())
 }
 
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum, Hash, EnumIter)]
@@ -131,11 +130,9 @@ fn main() {
         builder.add_component(component);
     }
 
-    /*
     if let Some(file) = args.token_file {
-        builder.add_component(HWIDComponent::FileToken(file.to_str().unwrap()));
+        builder.add_component(HWIDComponent::FileToken(file.to_str().unwrap().to_string()));
     }
-    */
 
     let result = builder.build(&args.key).unwrap();
     println!("{result}");
