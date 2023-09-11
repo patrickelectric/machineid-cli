@@ -7,6 +7,6 @@ edition = "2021"
 clap = { version = "4.4.2", features = [ "derive" ] }
 exitcode = "1.1.2"
 itertools = "0.11.0"
-machineid-rs = { git = "https://github.com/patrickelectric/machineid-rs", branch = "dev" }
+machineid-rs = { git = "https://github.com/patrickelectric/machineid-rs", rev = "6ccff00a9de76c3ad9c32a753872de52a807214d" }
 strum = "0.25.0"
 strum_macros = "0.25.2"
