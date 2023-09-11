@@ -23,7 +23,7 @@ struct Cli {
     token_file: Option<PathBuf>,
 
     /// Parts to be used on ID generation, check 'everything' to use all parts
-    #[arg(short, long, value_parser, num_args = 1.., value_delimiter = ' ')]
+    #[arg(short, long, value_parser, num_args = 1.., value_delimiter = ' ', default_value="system-id")]
     parts: Vec<UserHWIDComponent>,
 
     /// Use all parts
