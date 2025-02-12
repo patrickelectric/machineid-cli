@@ -134,6 +134,6 @@ fn main() {
         builder.add_component(HWIDComponent::FileToken(file.to_str().unwrap().to_string()));
     }
 
-    let result = builder.build(&args.key).unwrap();
+    let result = builder.build(&args.key).expect("Failed to build HWID");
     println!("{result}");
 }
